@@ -75,13 +75,13 @@ async def upload_command_handler(client, message):
                 await client.send_video(chat_id=message.chat.id, video=file_path, caption=caption, progress=progress_callback, progress_args=(message, done_files, total_files))
             else:
                 # Otherwise, send it as a document
-                await client.send_document(chat_id=message.chat.id, document=file_path, caption=caption, progress=progress_callback, progress_args=(message, done_files, total files))
+                await client.send_document(chat_id=message.chat.id, document=file_path, caption=caption, progress=progress_callback, progress_args=(message, done_files, total_files))
                 # Delete the file from the server after it has been uploaded to Telegram
                 os.remove(file_path)
                 done_files += 1
                 logging.info(f"{file_name}: Uploaded to Telegram and deleted from server")
 
-            except Exception as e:
+        except Exception as e:
                 logging.error(f"{file_name}: {str(e)}")
                 await message.reply(f"Failed to upload {file_name} to Telegram.")
 
